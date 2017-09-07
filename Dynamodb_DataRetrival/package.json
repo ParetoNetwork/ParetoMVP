@@ -1,0 +1,33 @@
+{
+  "name": "dynamodb_data_retrival",
+  "version": "1.0.0",
+  "description": "connect to the dynamo DB and pull the data from dbBased on Request parameter",
+  "main": "index.js",
+  "dependencies": {
+    "dynamodb": "^1.0.0",
+    "joi": "^10.6.0",
+    "moment": "^2.18.1",
+    "underscore": "^1.8.3",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ParetoNetwork/ParetoLambda.git"
+  },
+  "keywords": [
+    "nodejs",
+    "aws",
+    "lambda",
+    "moment"
+  ],
+  "author": "Uday Kiran",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ParetoNetwork/ParetoLambda/issues"
+  },
+  "homepage": "https://github.com/ParetoNetwork/ParetoLambda#readme"
+}
