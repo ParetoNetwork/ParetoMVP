@@ -4,8 +4,7 @@ Author: Venkatesh
 Date: 09-03-2017
 Date modified:
 Description: The function will connect to the event log api for each address and 
-pass the result to ranking algorithm to find out ranking and balance. After that save these details to dynamo DB 
-and insert the data in incremental manner.
+store ther response in AddressRanking table
 */
 // initializing variables
 var AWS = require("aws-sdk");
