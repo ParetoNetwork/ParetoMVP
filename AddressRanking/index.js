@@ -3,7 +3,7 @@ Title: Find out user ranking.
 Author: Venkatesh
 Date: 09-03-2017
 Date modified:
-Description: The userranking.js file will connect to the event log api for each address and 
+Description: The function will connect to the event log api for each address and 
 pass the result to ranking algorithm to find out ranking and balance. After that save these details to dynamo DB 
 and insert the data in incremental manner.
 */
@@ -20,20 +20,15 @@ exports.handler = function(event, context) {
         secretAccessKey: process.env['AWS_SECRET_ACCESS_KEY:'],
         region: process.env['AWS_DEFAULT_REGION']
     });
-	/*To be modified*/
-	AWS.config.update({
-        accessKeyId: 'AKIAJ4CHSFIC2NMYQYXQ',
-        secretAccessKey: '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',
-		region: 'us-west-2'
-    });
+	
 	
     var request = require('request');
 
 	//To get the list of address to find out the ranking. Currently it is hardcoded in Address TableName
 	var dynamoDB = new AWS.DynamoDB.DocumentClient();
 	var params = {
-    TableName : "ParetoMVP"
-    };
+	    TableName : table
+	    };
  	
 	dynamoDB.scan(params, onScan);
 
