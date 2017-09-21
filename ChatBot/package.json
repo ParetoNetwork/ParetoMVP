@@ -1,0 +1,32 @@
+{
+  "name": "telegrambot",
+  "version": "1.0.0",
+  "description": "The index.js file will subscribe to telegram setup and as soon as msg received by bot we will respond if commands are defined ",
+  "main": "index.js",
+  "dependencies": {
+    "markup": "0.0.4",
+    "node-telegram-bot-api": "^0.28.0",
+    "request": "^2.81.0",
+    "telegraf": "^3.10.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ParetoNetwork/ParetoLambda.git"
+  },
+  "keywords": [
+    "nodejs",
+    "aws",
+    "lambda",
+    "moment"
+  ],
+  "author": "Uday Kiran",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ParetoNetwork/ParetoLambda/issues"
+  },
+  "homepage": "https://github.com/ParetoNetwork/ParetoLambda#readme"
+}
