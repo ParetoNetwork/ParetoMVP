@@ -1,0 +1,140 @@
+service: Pareto
+
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  region: us-east-1
+  stage: stg
+  environment:
+    DYNAMODB_TABLE: Content-${self:provider.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+
+functions:
+  create:
+    handler: scripts/create.create
+    customName: Content_Data_Insert_Dynamodb
+    name: ${self:functions.create.customName}_function_${self:provider.stage}
+    description: This lambda is a subscriber a subscriber for api gate way 
+    memorySize: 128 
+    timeout: 80 
+    role: arn:aws:iam::240968882250:role/LamdaExecutionRole
+   
+    events:
+      - http:
+          path: Content/{id}
+          method: post
+          cors: true
+
+  list:
+    handler: scripts/list.list
+    customName: Content_Data_list_Dynamodb
+    name: ${self:functions.list.customName}_function_${self:provider.stage}
+    description: This lambda is a subscriber a subscriber for api gate way 
+    memorySize: 128 
+    timeout: 80
+    role: arn:aws:iam::240968882250:role/LamdaExecutionRole
+   
+    events:
+      - http:
+          path: Content
+          method: get
+          cors: true
+
+  get:
+    handler: scripts/get.get
+    customName: Content_Data_listById_Dynamodb
+    name: ${self:functions.get.customName}_function_${self:provider.stage}
+    description: This lambda is a subscriber a subscriber for api gate way 
+    memorySize: 128 
+    timeout: 80
+    role: arn:aws:iam::240968882250:role/LamdaExecutionRole
+    package:
+     #include: (comment exclude if you want to include node modules)
+      exclude:
+        - node_modules/**
+    events:
+      - http:
+          path: Content/{id}
+          method: get
+          cors: true
+
+  update:
+    handler: scripts/update.update
+    customName: Content_Data_update_Dynamodb
+    name: ${self:functions.update.customName}_function_${self:provider.stage}
+    description: This lambda is a subscriber a subscriber for api gate way 
+    memorySize: 128 
+    timeout: 80
+    role: arn:aws:iam::240968882250:role/LamdaExecutionRole
+    
+    events:
+      - http:
+          path: Content/{id}
+          method: put
+          cors: true
+
+  delete:
+    handler: scripts/delete.delete
+    customName: Content_Data_Delete_Dynamodb
+    name: ${self:functions.delete.customName}_function_${self:provider.stage}
+    description: This lambda is a subscriber a subscriber for api gate way 
+    memorySize: 128 
+    timeout: 80
+    role: arn:aws:iam::240968882250:role/LamdaExecutionRole
+    
+    events:
+      - http:
+          path: Content/{id}
+          method: delete
+          cors: true
+
+  search:
+    handler: scripts/search.search
+    customName: Content_Data_search_Dynamodb
+    name: ${self:functions.search.customName}_function_${self:provider.stage}
+    description: This lambda is a subscriber a subscriber for api gate way 
+    memorySize: 128 
+    timeout: 80 
+    environment:
+      AWS_TableName_HashKey: Id     
+    events:
+      - http:
+          path: search/Content
+          method: post
+          cors: true
+
+
+resources:
+  Resources:
+    ApiGatewayRestApi:
+      Type: AWS::ApiGateway::RestApi
+      Properties:
+        Name: ${self:service}_API_${self:provider.stage}
+        Description: This is an search api to expose content table data based on search parameters
+    # DynamoDbTable:
+      # Type: 'AWS::DynamoDB::Table'
+      # DeletionPolicy: Retain
+      # Properties:
+        # AttributeDefinitions:
+          # -
+            # AttributeName: Id
+            # AttributeType: S
+        # KeySchema:
+          # -
+            # AttributeName: Id
+            # KeyType: HASH
+        # ProvisionedThroughput:
+          # ReadCapacityUnits: 5
+          # WriteCapacityUnits: 5
+        # TableName: ${self:provider.environment.DYNAMODB_TABLE}
