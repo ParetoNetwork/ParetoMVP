@@ -23,12 +23,12 @@ region: us-east-1
 api keys:
   None
 endpoints:
-  POST - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/stg/content
-  GET - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/stg/content
-  GET - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/stg/content/{id}
-  PUT - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/stg/content/{id}
-  DELETE - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/stg/content/{id}
-  SEARCH - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/stg/search/content
+  POST - https://b5plyn0aha.execute-api.us-east-1.amazonaws.com/stg/content
+  GET - https://b5plyn0aha.execute-api.us-east-1.amazonaws.com/stg/content
+  GET - https://b5plyn0aha.execute-api.us-east-1.amazonaws.com/stg/Content/{id}
+  PUT - https://b5plyn0aha.execute-api.us-east-1.amazonaws.com/stg/content/{id}
+  DELETE - https://b5plyn0aha.execute-api.us-east-1.amazonaws.com/stg/content/{id}
+  SEARCH - https://b5plyn0aha.execute-api.us-east-1.amazonaws.com/stg/search/Content
 
 
 ## Usage
@@ -38,12 +38,12 @@ You can create, retrieve, update, or delete Content with the following commands:
 ### Create a Content sample
 
 ```bash
-curl -X POST https://XXXXXXX.execute-api.us-east-1.amazonaws.com/stg/Content --data '{ "text": "Learn Serverless" }'
+curl -X POST https://XXXXXXX.execute-api.us-east-1.amazonaws.com/stg/Content --data '{ "EthereumAddress": "sadgaskdkasjhksdjahasdasdkj",  "EthereumRank": "123456",  "recordStatus": true}'
 ```
 
 Example Result:
 ```bash
-{"text":"Learn Serverless","id":"ee6490d0-aa81-11e6-9ede-afdfa051af86","createdAt":1479138570824,"checked":false,"updatedAt":1479138570824}%
+{ "Success": true, "Data": [ { "EthereumAddress": "sadgaskdkasjhksdjahasdasdkj", "EthereumRank": "123456", "recordStatus": true, "Id": "5faf4650-be21-11e7-a340-f355bb709593", "createdAt": 1509443620661, "updatedAt": 1509443620661 } ] }%
 ```
 
 ### List all Content
@@ -54,10 +54,10 @@ curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/stg/Content
 
 Example output:
 ```bash
-[{"text":"Deploy my first service","id":"ac90fe80-aa83-11e6-9ede-afdfa051af86","checked":true,"updatedAt":1479139961304},{"text":"Learn Serverless","id":"20679390-aa85-11e6-9ede-afdfa051af86","createdAt":1479139943241,"checked":false,"updatedAt":1479139943241}]%
+{ "Success": true, "Data": [ { "EthereumAddress": "sadgaskdkasjhksdjahasdasdkj", "EthereumRank": "123456", "recordStatus": true, "Id": "5faf4650-be21-11e7-a340-f355bb709593", "createdAt": 1509443620661, "updatedAt": 1509443620661 } ] }%
 ```
 
-### Get one Todo
+### Get one Content
 
 ```bash
 # Replace the <id> part with a real id from your Content table
@@ -66,22 +66,22 @@ curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/stg/Content/<id>
 
 Example Result:
 ```bash
-{"text":"Learn Serverless","id":"ee6490d0-aa81-11e6-9ede-afdfa051af86","createdAt":1479138570824,"checked":false,"updatedAt":1479138570824}%
+{ "Success": true, "Data": [ { "EthereumAddress": "sadgaskdkasjhksdjahasdasdkj", "EthereumRank": "123456", "recordStatus": true, "Id": "5faf4650-be21-11e7-a340-f355bb709593", "createdAt": 1509443620661, "updatedAt": 1509443620661 } ] }%
 ```
 
-### Update a Todo
+### Update a Content
 
 ```bash
 # Replace the <id> part with a real id from your Content table
-curl -X PUT https://XXXXXXX.execute-api.us-east-1.amazonaws.com/stg/Content/<id> --data '{ "text": "Learn Serverless", "checked": true }'
+curl -X PUT https://XXXXXXX.execute-api.us-east-1.amazonaws.com/stg/Content/<id> --data '{ "Success": true, "Data": [ { "EthereumAddress": "sadgaskdkasjhksdjahasdasdkj", "EthereumRank": "123456", "recordStatus": true, "Id": "5faf4650-be21-11e7-a340-f355bb709593", "createdAt": 1509443620661, "updatedAt": 1509443620661 } ] }'
 ```
 
 Example Result:
 ```bash
-{"text":"Learn Serverless","id":"ee6490d0-aa81-11e6-9ede-afdfa051af86","createdAt":1479138570824,"checked":true,"updatedAt":1479138570824}%
+{ "Success": true, "Data": [ { "EthereumAddress": "sadgaskdkasjhksdjahasdasdkj", "EthereumRank": "123456", "recordStatus": true, "Id": "5faf4650-be21-11e7-a340-f355bb709593", "createdAt": 1509443620661, "updatedAt": 1509443620661 } ] }%
 ```
 
-### Delete a Todo
+### Delete a Content
 
 ```bash
 # Replace the <id> part with a real id from your Content table
@@ -108,4 +108,4 @@ This is can be done via settings in the `serverless.yml`.
     WriteCapacityUnits: 1
 ```
 
-In case you expect a lot of traffic fluctuation we recommend to checkout this guide on how to auto scale DynamoDB [https://aws.amazon.com/blogs/aws/auto-scale-dynamodb-with-dynamic-dynamodb/](https://aws.amazon.com/blogs/aws/auto-scale-dynamodb-with-dynamic-dynamodb/)
+
