@@ -19,16 +19,16 @@ Serverless: Stack update finished…
 Service Information
 service: serverless-XXXXX-stg
 stage: stg
-region: us-east-1
+region:  us-west-2
 api keys:
   None
 endpoints:
-  POST - https://b5plyn0aha.execute-api.us-east-1.amazonaws.com/stg/content
-  GET - https://b5plyn0aha.execute-api.us-east-1.amazonaws.com/stg/content
-  GET - https://b5plyn0aha.execute-api.us-east-1.amazonaws.com/stg/Content/{id}
-  PUT - https://b5plyn0aha.execute-api.us-east-1.amazonaws.com/stg/content/{id}
-  DELETE - https://b5plyn0aha.execute-api.us-east-1.amazonaws.com/stg/content/{id}
-  SEARCH - https://b5plyn0aha.execute-api.us-east-1.amazonaws.com/stg/search/Content
+  POST - https://0tw2irdb42.execute-api.us-west-2.amazonaws.com/stg/Content/
+  GET - https://0tw2irdb42.execute-api.us-west-2.amazonaws.com/stg/Content/
+  GET - https://0tw2irdb42.execute-api.us-west-2.amazonaws.com/stg/Content/{id}
+  PUT - https://0tw2irdb42.execute-api.us-west-2.amazonaws.com/stg/Content/{id}
+  DELETE - https://0tw2irdb42.execute-api.us-west-2.amazonaws.com/stg/Content/{id}
+  SEARCH - https://0tw2irdb42.execute-api.us-west-2.amazonaws.com/stg/search/Content
 
 
 ## Usage
@@ -38,7 +38,7 @@ You can create, retrieve, update, or delete Content with the following commands:
 ### Create a Content sample
 
 ```bash
-curl -X POST https://XXXXXXX.execute-api.us-east-1.amazonaws.com/stg/Content --data '{ "EthereumAddress": "sadgaskdkasjhksdjahasdasdkj",  "EthereumRank": "123456",  "recordStatus": true}'
+curl -X POST https://XXXXXXX.execute-api.us-west-2.amazonaws.com/stg/Content --data '{ "EthereumAddress": "sadgaskdkasjhksdjahasdasdkj",  "EthereumRank": "123456",  "recordStatus": true}'
 ```
 
 Example Result:
@@ -49,7 +49,7 @@ Example Result:
 ### List all Content
 
 ```bash
-curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/stg/Content
+curl https://XXXXXXX.execute-api.us-west-2.amazonaws.com/stg/Content
 ```
 
 Example output:
@@ -61,7 +61,7 @@ Example output:
 
 ```bash
 # Replace the <id> part with a real id from your Content table
-curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/stg/Content/<id>
+curl https://XXXXXXX.execute-api.us-west-2.amazonaws.com/stg/Content/<id>
 ```
 
 Example Result:
@@ -73,7 +73,7 @@ Example Result:
 
 ```bash
 # Replace the <id> part with a real id from your Content table
-curl -X PUT https://XXXXXXX.execute-api.us-east-1.amazonaws.com/stg/Content/<id> --data '{ "Success": true, "Data": [ { "EthereumAddress": "sadgaskdkasjhksdjahasdasdkj", "EthereumRank": "123456", "recordStatus": true, "Id": "5faf4650-be21-11e7-a340-f355bb709593", "createdAt": 1509443620661, "updatedAt": 1509443620661 } ] }'
+curl -X PUT https://XXXXXXX.execute-api.us-west-2.amazonaws.com/stg/Content/<id> --data '{ "Success": true, "Data": [ { "EthereumAddress": "sadgaskdkasjhksdjahasdasdkj", "EthereumRank": "123456", "recordStatus": true, "Id": "5faf4650-be21-11e7-a340-f355bb709593", "createdAt": 1509443620661, "updatedAt": 1509443620661 } ] }'
 ```
 
 Example Result:
@@ -85,7 +85,7 @@ Example Result:
 
 ```bash
 # Replace the <id> part with a real id from your Content table
-curl -X DELETE https://XXXXXXX.execute-api.us-east-1.amazonaws.com/stg/Content/<id>
+curl -X DELETE https://XXXXXXX.execute-api.us-west-2.amazonaws.com/stg/Content/<id>
 ```
 
 No output
