@@ -5,7 +5,7 @@ frameworkVersion: ">=1.1.0 <2.0.0"
 provider:
   name: aws
   runtime: nodejs6.10
-  region: us-east-1
+  region:  us-west-2
   stage: stg
   environment:
     DYNAMODB_TABLE: Content-${self:provider.stage}
