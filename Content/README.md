@@ -23,12 +23,12 @@ region:  us-west-2
 api keys:
   None
 endpoints:
-  POST - https://0tw2irdb42.execute-api.us-west-2.amazonaws.com/stg/Content/
-  GET - https://0tw2irdb42.execute-api.us-west-2.amazonaws.com/stg/Content/
-  GET - https://0tw2irdb42.execute-api.us-west-2.amazonaws.com/stg/Content/{id}
-  PUT - https://0tw2irdb42.execute-api.us-west-2.amazonaws.com/stg/Content/{id}
-  DELETE - https://0tw2irdb42.execute-api.us-west-2.amazonaws.com/stg/Content/{id}
-  SEARCH - https://0tw2irdb42.execute-api.us-west-2.amazonaws.com/stg/search/Content
+  POST - https://XXXXXXX.execute-api.us-west-2.amazonaws.com/stg/Content/
+  GET - https://XXXXXXX.execute-api.us-west-2.amazonaws.com/stg/Content/
+  GET - https://XXXXXXX.execute-api.us-west-2.amazonaws.com/stg/Content/{id}
+  PUT - https://XXXXXXX.execute-api.us-west-2.amazonaws.com/stg/Content/{id}
+  DELETE - https://XXXXXXX.execute-api.us-west-2.amazonaws.com/stg/Content/{id}
+  SEARCH - https://XXXXXXX.execute-api.us-west-2.amazonaws.com/stg/search/Content
 
 
 ## Usage

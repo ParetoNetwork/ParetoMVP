@@ -1,12 +1,13 @@
-service: Pareto
+service: pareto${self:provider.implementation}
 
 frameworkVersion: ">=1.1.0 <2.0.0"
 
 provider:
   name: aws
   runtime: nodejs6.10
-  region:  us-west-2
-  stage: stg
+  region: us-west-2
+  stage: Stg
+  implementation: Content
   environment:
     DYNAMODB_TABLE: Content-${self:provider.stage}
   iamRoleStatements:
@@ -23,12 +24,12 @@ provider:
 functions:
   create:
     handler: scripts/create.create
-    customName: Content_Data_Insert_Dynamodb
-    name: ${self:functions.create.customName}_function_${self:provider.stage}
+    customName: DataInsertDynamodb
+    name: ${self:service}${self:functions.create.customName}Function-${self:provider.stage}
     description: This lambda is a subscriber a subscriber for api gate way 
     memorySize: 128 
     timeout: 80 
-    role: arn:aws:iam::240968882250:role/LamdaExecutionRole
+    role: arn:aws:iam::240968882250:role/LambdaExecutionRole
    
     events:
       - http:
@@ -38,12 +39,12 @@ functions:
 
   list:
     handler: scripts/list.list
-    customName: Content_Data_list_Dynamodb
-    name: ${self:functions.list.customName}_function_${self:provider.stage}
+    customName: DataListDynamodb
+    name: ${self:service}${self:functions.list.customName}Function-${self:provider.stage}
     description: This lambda is a subscriber a subscriber for api gate way 
     memorySize: 128 
     timeout: 80
-    role: arn:aws:iam::240968882250:role/LamdaExecutionRole
+    role: arn:aws:iam::240968882250:role/LambdaExecutionRole
    
     events:
       - http:
@@ -53,12 +54,12 @@ functions:
 
   get:
     handler: scripts/get.get
-    customName: Content_Data_listById_Dynamodb
-    name: ${self:functions.get.customName}_function_${self:provider.stage}
+    customName: DataListByIdDynamodb
+    name: ${self:service}${self:functions.get.customName}Function-${self:provider.stage}
     description: This lambda is a subscriber a subscriber for api gate way 
     memorySize: 128 
     timeout: 80
-    role: arn:aws:iam::240968882250:role/LamdaExecutionRole
+    role: arn:aws:iam::240968882250:role/LambdaExecutionRole
     package:
      #include: (comment exclude if you want to include node modules)
       exclude:
@@ -71,12 +72,12 @@ functions:
 
   update:
     handler: scripts/update.update
-    customName: Content_Data_update_Dynamodb
-    name: ${self:functions.update.customName}_function_${self:provider.stage}
+    customName: DataUpdateDynamodb
+    name: ${self:service}${self:functions.update.customName}Function-${self:provider.stage}
     description: This lambda is a subscriber a subscriber for api gate way 
     memorySize: 128 
     timeout: 80
-    role: arn:aws:iam::240968882250:role/LamdaExecutionRole
+    role: arn:aws:iam::240968882250:role/LambdaExecutionRole
     
     events:
       - http:
@@ -86,12 +87,12 @@ functions:
 
   delete:
     handler: scripts/delete.delete
-    customName: Content_Data_Delete_Dynamodb
-    name: ${self:functions.delete.customName}_function_${self:provider.stage}
+    customName: DataDeleteDynamodb
+    name: ${self:service}${self:functions.delete.customName}Function-${self:provider.stage}
     description: This lambda is a subscriber a subscriber for api gate way 
     memorySize: 128 
     timeout: 80
-    role: arn:aws:iam::240968882250:role/LamdaExecutionRole
+    role: arn:aws:iam::240968882250:role/LambdaExecutionRole
     
     events:
       - http:
@@ -101,8 +102,8 @@ functions:
 
   search:
     handler: scripts/search.search
-    customName: Content_Data_search_Dynamodb
-    name: ${self:functions.search.customName}_function_${self:provider.stage}
+    customName: DataSearchDynamodb
+    name: ${self:service}${self:functions.search.customName}Function-${self:provider.stage}
     description: This lambda is a subscriber a subscriber for api gate way 
     memorySize: 128 
     timeout: 80 
@@ -110,7 +111,7 @@ functions:
       AWS_TableName_HashKey: Id     
     events:
       - http:
-          path: search/Content
+          path: Search/Content
           method: post
           cors: true
 
@@ -120,7 +121,7 @@ resources:
     ApiGatewayRestApi:
       Type: AWS::ApiGateway::RestApi
       Properties:
-        Name: ${self:service}_API_${self:provider.stage}
+        Name: ${self:service}API-${self:provider.stage}
         Description: This is an search api to expose content table data based on search parameters
     # DynamoDbTable:
       # Type: 'AWS::DynamoDB::Table'
