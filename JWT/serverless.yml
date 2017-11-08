@@ -1,0 +1,49 @@
+service: pareto${self:provider.implementation}
+
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  region: us-west-2
+  stage: Stg
+  implementation: Authorization  
+  environment:
+    AWS_JWT_KEY: 7376a8db-7e3b-45e7-a673-7071a272ec46
+    
+functions:
+  jwt:
+    handler: scripts/jwt.jwt
+    customName: Jwt
+    name: ${self:service}${self:functions.jwt.customName}Function-${self:provider.stage}
+    description: This lambda is jwt verifier 
+    memorySize: 128 
+    timeout: 180 
+    role: arn:aws:iam::240968882250:role/LambdaExecutionRole
+    
+ 
+  jwtTokenIssue:
+    handler: scripts/jwtTokenIssue.jwtTokenIssue
+    customName: JwtTokenIssue
+    name: ${self:service}${self:functions.jwtTokenIssue.customName}Function-${self:provider.stage}
+    description: This lambda is a subscriber a subscriber for api gate way for jwtTokenIssue 
+    memorySize: 128 
+    timeout: 180 
+    role: arn:aws:iam::240968882250:role/LambdaExecutionRole
+    environment:
+        AWS_JWT_EXPIRY_MINUTES: 2
+   
+    events:
+      - http:
+          path: jwtTokenIssue
+          method: post
+          cors: true
+ 
+resources:
+  Resources:
+    ApiGatewayRestApi:
+      Type: AWS::ApiGateway::RestApi
+      Properties:
+        Name: ${self:service}API-${self:provider.stage}
+        Description: This is an search api to expose content table data based on search parameters        
+      

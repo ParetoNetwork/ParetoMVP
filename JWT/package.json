@@ -1,0 +1,10 @@
+{
+  "name": "pareto-aws-rest-with-dynamodb",
+  "version": "1.0.0",
+  "description": "Serverless CRUD service exposing a REST HTTP interface",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "njwt": "^0.4.0"
+  }
+}
