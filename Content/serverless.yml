@@ -1,4 +1,4 @@
-service: pareto${self:provider.implementation}
+service: ${self:provider.stage}-pareto${self:provider.implementation}
 
 frameworkVersion: ">=1.1.0 <2.0.0"
 
@@ -6,7 +6,7 @@ provider:
   name: aws
   runtime: nodejs6.10
   region: us-west-2
-  stage: Stg
+  stage: stg
   implementation: Content
   environment:
     DYNAMODB_TABLE: Content-${self:provider.stage}
@@ -24,8 +24,8 @@ provider:
 functions:
   create:
     handler: scripts/create.create
-    customName: DataInsertDynamodb
-    name: ${self:service}${self:functions.create.customName}Function-${self:provider.stage}
+    customName: DataInsertToDynamodb
+    name: ${self:service}${self:functions.create.customName}Function
     description: This lambda is a subscriber a subscriber for api gate way 
     memorySize: 128 
     timeout: 80 
@@ -39,8 +39,8 @@ functions:
 
   list:
     handler: scripts/list.list
-    customName: DataListDynamodb
-    name: ${self:service}${self:functions.list.customName}Function-${self:provider.stage}
+    customName: DataListFromDynamodb
+    name: ${self:service}${self:functions.list.customName}Function
     description: This lambda is a subscriber a subscriber for api gate way 
     memorySize: 128 
     timeout: 80
@@ -54,8 +54,8 @@ functions:
 
   get:
     handler: scripts/get.get
-    customName: DataListByIdDynamodb
-    name: ${self:service}${self:functions.get.customName}Function-${self:provider.stage}
+    customName: DataListByIdFromDynamodb
+    name: ${self:service}${self:functions.get.customName}Function
     description: This lambda is a subscriber a subscriber for api gate way 
     memorySize: 128 
     timeout: 80
@@ -72,8 +72,8 @@ functions:
 
   update:
     handler: scripts/update.update
-    customName: DataUpdateDynamodb
-    name: ${self:service}${self:functions.update.customName}Function-${self:provider.stage}
+    customName: DataUpdateToDynamodb
+    name: ${self:service}${self:functions.update.customName}Function
     description: This lambda is a subscriber a subscriber for api gate way 
     memorySize: 128 
     timeout: 80
@@ -88,7 +88,7 @@ functions:
   delete:
     handler: scripts/delete.delete
     customName: DataDeleteDynamodb
-    name: ${self:service}${self:functions.delete.customName}Function-${self:provider.stage}
+    name: ${self:service}${self:functions.delete.customName}Function
     description: This lambda is a subscriber a subscriber for api gate way 
     memorySize: 128 
     timeout: 80
@@ -102,8 +102,8 @@ functions:
 
   search:
     handler: scripts/search.search
-    customName: DataSearchDynamodb
-    name: ${self:service}${self:functions.search.customName}Function-${self:provider.stage}
+    customName: DataSearchWithDynamodb
+    name: ${self:service}${self:functions.search.customName}Function
     description: This lambda is a subscriber a subscriber for api gate way 
     memorySize: 128 
     timeout: 80 
@@ -121,7 +121,7 @@ resources:
     ApiGatewayRestApi:
       Type: AWS::ApiGateway::RestApi
       Properties:
-        Name: ${self:service}API-${self:provider.stage}
+        Name: ${self:service}API
         Description: This is an search api to expose content table data based on search parameters
     # DynamoDbTable:
       # Type: 'AWS::DynamoDB::Table'
