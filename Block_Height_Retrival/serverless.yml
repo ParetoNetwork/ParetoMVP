@@ -1,0 +1,33 @@
+service: ${self:provider.stage}-pareto${self:provider.implementation}
+
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  region: us-west-2
+  stage: stg
+  implementation: BlockHeight
+  environment:
+    AWS_S3_BUCKET_NAME: ${self:provider.stage}.pareto.blockheight.config
+	AWS_S3_CONFIG_FILE: ${self:provider.stage}-pareto${self:provider.implementation}Config.js
+	BLOCK_HEIGHT_URI: https://api.etherscan.io/api?module=proxy&action=eth_blockNumber&apikey=TTXRNGSXAIHSTGK3263XVTQHYBG9TPBUI2
+  
+
+functions:
+  create:
+    handler: scripts/create.create
+    customName: DataInsertToS3
+    name: ${self:service}${self:functions.create.customName}Function
+    description: This lambda is a subscriber a subscriber for Scheduler
+    memorySize: 128 
+    timeout: 80 
+    role: arn:aws:iam::240968882250:role/LambdaExecutionRole   
+    events:
+#      - s3:
+#          bucket: ${self:provider.environment.AWS_S3_BUCKET_NAME}
+
+      - schedule:
+          rate: rate(1 hour)
+          name: ${self:service}Scheduler
+          description: 'your scheduled rate is every 1 hours'
