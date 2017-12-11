@@ -10,6 +10,7 @@ provider:
   implementation: Content
   environment:
     DYNAMODB_TABLE: Content-${self:provider.stage}
+    BLOCK_HEIGHT_URI: https://s3-us-west-2.amazonaws.com/stg.pareto.blockheight.config/stg-paretoBlockHeightConfig.js
   iamRoleStatements:
     - Effect: Allow
       Action:

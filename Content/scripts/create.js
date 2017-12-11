@@ -39,14 +39,14 @@ module.exports.create = (event, context, callback) => {
     data.createdAt = timestamp;
     data.updatedAt = timestamp;
 
-    request(process.env.BLOCK_HEIGHT_API_URL, function(error, response, body) {
+    request(process.env.BLOCK_HEIGHT_URI, function(error, response, body) {
         if (error) {
             result.Success = false;
             result.Data = [];
             result.error = JSON.stringify(error);
             sendResponse(result, callback)
         } else {
-            let body = JSON.parse(body)
+            body = JSON.parse(body)
             data.blockHeight = parseInt(body.result);			
 			
             const params = {
