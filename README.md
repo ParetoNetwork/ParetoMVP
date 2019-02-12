@@ -1,4 +1,6 @@
-# Pareto Network MVP/Alpha
+# Pareto Network MVP/Alpha  (OLD, system has passed Beta stage and now Production)
+
+Watch [Pareto Network Activity Repo](https://github.com/ParetoNetwork/ParetoDevelopmentActivityRelay) for latest activity
 
 <p align="center">
   <img src="Pareto-Logo.png" />
